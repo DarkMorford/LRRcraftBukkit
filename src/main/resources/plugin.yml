@@ -2,7 +2,9 @@ name: LRRcraftBukkit
 main: net.darkmorford.lrrcraftbukkit.LRRcraftBukkit
 version: 0.1-SNAPSHOT
 author: DarkMorford
-description: LoadingReadyRun Twitch notifier
+description: LRRcraft Bukkit plugin
 commands:
-  lrr refresh:
-    description: Refresh the current status of the Twitch stream
+  lrrcraftbukkit:
+    usage: /lrrcraftbukkit
+    aliases: [lcb]
+    description: LRRcraft Bukkit plugin

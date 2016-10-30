@@ -8,3 +8,11 @@ commands:
     usage: /lrrcraftbukkit
     aliases: [lcb]
     description: LRRcraft Bukkit plugin
+  lrrcraftbukkit map:
+    usage: /lrrcraftbukkit map
+    aliases: [lcb map]
+    description: Link to the DynMap
+  lrrcraftbukkit discord:
+    usage: /lrrcraftbukkit discord
+    aliases: [lcb discord]
+    description: Link to the Discord channel

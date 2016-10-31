@@ -46,6 +46,11 @@ public class PlayerAccount implements ConfigurationSerializable {
     }
 
     // Mutators
+    int setBalance(int amount) {
+        playerBalance = amount;
+        return playerBalance;
+    }
+
     int addBalance(int amount) {
         playerBalance += amount;
         return playerBalance;

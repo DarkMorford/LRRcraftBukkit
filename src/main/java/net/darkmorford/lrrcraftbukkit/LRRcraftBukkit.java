@@ -20,6 +20,10 @@ public class LRRcraftBukkit extends JavaPlugin {
         // Get the logger
         logger = getLogger();
 
+        // Save the default config if necessary
+        // (If config.yml already exists, this will not overwrite it)
+        saveDefaultConfig();
+
         // Connect the refresh command to its implementation
         logger.info("Registering commands");
 //      getCommand("lrrcraftbukkit").setExecutor(new RefreshCommand());

@@ -5,15 +5,15 @@ import net.milkbowl.vault.economy.EconomyResponse;
 
 import java.util.List;
 
-public class Economy extends AbstractEconomy{
+public class Economy extends AbstractEconomy {
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     public String getName() {
-        return null;
+        return "LRRconomy";
     }
 
     @Override
@@ -27,107 +27,107 @@ public class Economy extends AbstractEconomy{
     }
 
     @Override
-    public String format(double v) {
-        return null;
+    public String format(double amount) {
+        return String.format("%d DB", (int) amount);
     }
 
     @Override
     public String currencyNamePlural() {
-        return null;
+        return "Desert Bucks";
     }
 
     @Override
     public String currencyNameSingular() {
-        return null;
+        return "Desert Buck";
     }
 
     @Override
-    public boolean hasAccount(String s) {
+    public boolean hasAccount(String playerName) {
         return false;
     }
 
     @Override
-    public boolean hasAccount(String s, String s1) {
+    public boolean hasAccount(String playerName, String worldName) {
         return false;
     }
 
     @Override
-    public double getBalance(String s) {
+    public double getBalance(String playerName) {
         return 0;
     }
 
     @Override
-    public double getBalance(String s, String s1) {
+    public double getBalance(String playerName, String worldName) {
         return 0;
     }
 
     @Override
-    public boolean has(String s, double v) {
+    public boolean has(String playerName, double amount) {
         return false;
     }
 
     @Override
-    public boolean has(String s, String s1, double v) {
+    public boolean has(String playerName, String worldName, double amount) {
         return false;
     }
 
     @Override
-    public EconomyResponse withdrawPlayer(String s, double v) {
+    public EconomyResponse withdrawPlayer(String playerName, double amount) {
         return null;
     }
 
     @Override
-    public EconomyResponse withdrawPlayer(String s, String s1, double v) {
+    public EconomyResponse withdrawPlayer(String playerName, String worldName, double amount) {
         return null;
     }
 
     @Override
-    public EconomyResponse depositPlayer(String s, double v) {
+    public EconomyResponse depositPlayer(String playerName, double amount) {
         return null;
     }
 
     @Override
-    public EconomyResponse depositPlayer(String s, String s1, double v) {
+    public EconomyResponse depositPlayer(String playerName, String worldName, double amount) {
         return null;
     }
 
     @Override
-    public EconomyResponse createBank(String s, String s1) {
+    public EconomyResponse createBank(String bankName, String playerName) {
         return null;
     }
 
     @Override
-    public EconomyResponse deleteBank(String s) {
+    public EconomyResponse deleteBank(String bankName) {
         return null;
     }
 
     @Override
-    public EconomyResponse bankBalance(String s) {
+    public EconomyResponse bankBalance(String bankName) {
         return null;
     }
 
     @Override
-    public EconomyResponse bankHas(String s, double v) {
+    public EconomyResponse bankHas(String bankName, double amount) {
         return null;
     }
 
     @Override
-    public EconomyResponse bankWithdraw(String s, double v) {
+    public EconomyResponse bankWithdraw(String bankName, double amount) {
         return null;
     }
 
     @Override
-    public EconomyResponse bankDeposit(String s, double v) {
+    public EconomyResponse bankDeposit(String bankName, double amount) {
         return null;
     }
 
     @Override
-    public EconomyResponse isBankOwner(String s, String s1) {
+    public EconomyResponse isBankOwner(String bankName, String playerName) {
         return null;
     }
 
     @Override
-    public EconomyResponse isBankMember(String s, String s1) {
+    public EconomyResponse isBankMember(String bankName, String playerName) {
         return null;
     }
 
@@ -137,12 +137,12 @@ public class Economy extends AbstractEconomy{
     }
 
     @Override
-    public boolean createPlayerAccount(String s) {
+    public boolean createPlayerAccount(String playerName) {
         return false;
     }
 
     @Override
-    public boolean createPlayerAccount(String s, String s1) {
+    public boolean createPlayerAccount(String playerName, String worldName) {
         return false;
     }
 }

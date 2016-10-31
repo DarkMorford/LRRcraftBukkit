@@ -1,5 +1,6 @@
 package net.darkmorford.lrrcraftbukkit;
 
+import net.darkmorford.lrrcraftbukkit.Listeners.PlayerJoinListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -8,8 +9,8 @@ import java.util.logging.Logger;
 
 public class LRRcraftBukkit extends JavaPlugin {
 
-    static Logger logger;
-    static JavaPlugin plugin;
+    public static Logger logger;
+    public static JavaPlugin plugin;
 
     @Override
     public void onEnable() {
@@ -22,6 +23,10 @@ public class LRRcraftBukkit extends JavaPlugin {
         // Connect the refresh command to its implementation
         logger.info("Registering commands");
 //      getCommand("lrrcraftbukkit").setExecutor(new RefreshCommand());
+
+        // Set up our event listeners
+        logger.info("Registering event listeners");
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
 
 //      logger.info("Registering recipes");
 //      Recipe leatherRecipe = new FurnaceRecipe(new ItemStack(Material.LEATHER), Material.ROTTEN_FLESH);

@@ -48,7 +48,7 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public boolean hasAccount(String playerName, String worldName) {
-        return false;
+        return hasAccount(playerName);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public double getBalance(String playerName, String worldName) {
-        return 0;
+        return getBalance(playerName);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public boolean has(String playerName, String worldName, double amount) {
-        return false;
+        return has(playerName, amount);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public EconomyResponse withdrawPlayer(String playerName, String worldName, double amount) {
-        return null;
+        return withdrawPlayer(playerName, amount);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public EconomyResponse depositPlayer(String playerName, String worldName, double amount) {
-        return null;
+        return depositPlayer(playerName, amount);
     }
 
     @Override
@@ -143,6 +143,6 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public boolean createPlayerAccount(String playerName, String worldName) {
-        return false;
+        return createPlayerAccount(playerName);
     }
 }

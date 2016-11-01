@@ -63,12 +63,14 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public boolean has(String playerName, double amount) {
-        return false;
+        double balance = getBalance(playerName);
+        return balance >= amount;
     }
 
     @Override
     public boolean has(String playerName, String worldName, double amount) {
-        return has(playerName, amount);
+        double balance = getBalance(playerName, worldName);
+        return balance >= amount;
     }
 
     @Override

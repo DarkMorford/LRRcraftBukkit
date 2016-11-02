@@ -51,18 +51,28 @@ public class AccountManager {
         OfflinePlayer player = null;
         double balance = 0;
 
+        if (dbConn == null) {
+            return null;
+        }
+
         try {
             // Fetch the player information from the database
             PreparedStatement stmt = dbConn.prepareStatement(query);
             stmt.setString(1, playerName);
             ResultSet result = stmt.executeQuery();
 
-            // Get a Player object from the UUID
-            UUID playerId = UUID.fromString(result.getString("uuid"));
-            player = plugin.getServer().getOfflinePlayer(playerId);
+            if (result.next()) {
+                // Get an OfflinePlayer object from the UUID
+                UUID playerId = UUID.fromString(result.getString("uuid"));
+                player = plugin.getServer().getOfflinePlayer(playerId);
 
-            // Get the global balance for the Player
-            balance = result.getDouble("globalBalance");
+                // Get the global balance for the Player
+                balance = result.getDouble("globalBalance");
+            } else {
+                plugin.getLogger().warning("No account exists for player " + playerName);
+                stmt.close();
+                return null;
+            }
 
             // Done with the database
             stmt.close();

@@ -1,20 +1,20 @@
 package net.darkmorford.lrrcraftbukkit.Economy;
 
-import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
 
 public class PlayerAccount {
     // Member variables
-    private Player _player;
+    private OfflinePlayer _player;
     private double _balance;
 
     // Constructors
-    PlayerAccount(Player player, double balance) {
+    PlayerAccount(OfflinePlayer player, double balance) {
         _player = player;
         _balance = balance;
     }
 
     // Accessors
-    Player getPlayer() {
+    OfflinePlayer getPlayer() {
         return _player;
     }
 

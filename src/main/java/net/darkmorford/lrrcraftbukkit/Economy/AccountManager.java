@@ -49,7 +49,8 @@ public class AccountManager {
         String query = "CREATE TABLE IF NOT EXISTS `players` (" +
                 "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "`name` TEXT NOT NULL," +
-                "`uuid` TEXT NOT NULL UNIQUE)";
+                "`uuid` TEXT NOT NULL UNIQUE," +
+                "`globalBalance` NUMERIC NOT NULL DEFAULT 0)";
         stmt.execute(query);
         stmt.close();
 

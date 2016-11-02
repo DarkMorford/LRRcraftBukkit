@@ -7,15 +7,53 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
 public class AccountManager {
     private Map<String, PlayerAccount> accounts;
+    private Connection dbConn = null;
 
-    AccountManager() {
+    public AccountManager() {
         accounts = new HashMap<>();
+
+        // Open a connection to the account database
+        try {
+            // Register the SQLite driver
+            Class.forName("org.sqlite.JDBC");
+
+            // Build the path to the database file
+            File dbPath = new File(LRRcraftBukkit.plugin.getDataFolder(), "accounts.db");
+
+            // Create the connection
+            dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbPath.getAbsolutePath());
+
+            // Set up the tables we need
+            initializeDatabase();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeDatabase() throws SQLException {
+        Statement stmt = dbConn.createStatement();
+
+        // Create the Players table
+        String query = "CREATE TABLE IF NOT EXISTS `players` (" +
+                "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "`name` TEXT NOT NULL," +
+                "`uuid` TEXT NOT NULL)";
+        stmt.execute(query);
+
+        // Done initializing
+        stmt.close();
     }
 
     void save() {

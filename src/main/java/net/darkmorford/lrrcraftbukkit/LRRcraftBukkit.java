@@ -1,5 +1,6 @@
 package net.darkmorford.lrrcraftbukkit;
 
+import net.darkmorford.lrrcraftbukkit.Economy.AccountManager;
 import net.darkmorford.lrrcraftbukkit.Listeners.PlayerJoinListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -31,6 +32,10 @@ public class LRRcraftBukkit extends JavaPlugin {
         // Set up our event listeners
         logger.info("Registering event listeners");
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+
+        // Set up the account manager
+        logger.info("Creating account manager");
+        AccountManager mgr = new AccountManager();
 
 //      logger.info("Registering recipes");
 //      Recipe leatherRecipe = new FurnaceRecipe(new ItemStack(Material.LEATHER), Material.ROTTEN_FLESH);

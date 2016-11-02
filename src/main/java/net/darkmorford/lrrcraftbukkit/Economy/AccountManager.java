@@ -49,10 +49,25 @@ public class AccountManager {
         String query = "CREATE TABLE IF NOT EXISTS `players` (" +
                 "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "`name` TEXT NOT NULL," +
-                "`uuid` TEXT NOT NULL)";
+                "`uuid` TEXT NOT NULL UNIQUE)";
         stmt.execute(query);
+        stmt.close();
 
-        // Done initializing
+        // Create the Worlds table
+        query = "CREATE TABLE IF NOT EXISTS `worlds` (" +
+                "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "`name` TEXT NOT NULL," +
+                "`uuid` TEXT NOT NULL UNIQUE)";
+        stmt.execute(query);
+        stmt.close();
+
+        // Create the PlayerAccounts table
+        query = "CREATE TABLE IF NOT EXISTS `playerAccounts` (" +
+                "`player` INTEGER NOT NULL," +
+                "`world` INTEGER NOT NULL," +
+                "`balance` NUMERIC NOT NULL DEFAULT 0," +
+                "PRIMARY KEY(`player`, `world`))";
+        stmt.execute(query);
         stmt.close();
     }
 

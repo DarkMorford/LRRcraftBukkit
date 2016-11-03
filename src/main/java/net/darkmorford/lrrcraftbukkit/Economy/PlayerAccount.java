@@ -4,13 +4,15 @@ import org.bukkit.OfflinePlayer;
 
 public class PlayerAccount {
     // Member variables
+    private int _databaseId;
     private OfflinePlayer _player;
     private double _balance;
 
     // Constructors
-    PlayerAccount(OfflinePlayer player, double balance) {
+    PlayerAccount(OfflinePlayer player, double balance, int id) {
         _player = player;
         _balance = balance;
+        _databaseId = id;
     }
 
     // Accessors
@@ -20,6 +22,10 @@ public class PlayerAccount {
 
     double getBalance() {
         return _balance;
+    }
+
+    int getDatabaseId() {
+        return _databaseId;
     }
 
     // Mutators

@@ -50,6 +50,7 @@ public class AccountManager {
 
         OfflinePlayer player = null;
         double balance = 0;
+        int id = 0;
 
         if (dbConn == null) {
             return null;
@@ -68,6 +69,9 @@ public class AccountManager {
 
                 // Get the global balance for the Player
                 balance = result.getDouble("globalBalance");
+
+                // Get the player's database ID
+                id = result.getInt("id");
             } else {
                 plugin.getLogger().warning("No account exists for player " + playerName);
                 stmt.close();
@@ -81,7 +85,7 @@ public class AccountManager {
             return null;
         }
 
-        return new PlayerAccount(player, balance);
+        return new PlayerAccount(player, balance, id);
     }
 
     private void initializeDatabase() throws SQLException {

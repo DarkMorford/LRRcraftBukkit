@@ -113,40 +113,4 @@ public class AccountManager {
         stmt.execute(query);
         stmt.close();
     }
-
-    void save() {
-        try {
-            YamlConfiguration accountFile = new YamlConfiguration();
-
-            accountFile.createSection("accounts", accounts);
-
-            accountFile.save(new File(plugin.getDataFolder(), "accounts.yml"));
-        } catch (IOException e) {
-            plugin.getLogger().log(Level.SEVERE, "Save Failed!", e);
-        }
-    }
-
-    void load() {
-        try {
-            File accountFile = new File(plugin.getDataFolder(), "accounts.yml");
-            if (accountFile.exists()) {
-                // Load the YAML file
-                YamlConfiguration accountMap = new YamlConfiguration();
-                accountMap.load(accountFile);
-
-                // Grab the list of accounts
-                ConfigurationSection section = accountMap.getConfigurationSection("accounts");
-
-                // Iterate through each one
-                for (String accountName: section.getKeys(false)) {
-                    PlayerAccount account = (PlayerAccount) section.get(accountName);
-                    accounts.put(accountName, account);
-                }
-            }
-        } catch (IOException e) {
-            plugin.getLogger().log(Level.SEVERE, "Load Failed!", e);
-        } catch (InvalidConfigurationException e) {
-            plugin.getLogger().log(Level.SEVERE, "Invalid Account File!", e);
-        }
-    }
 }

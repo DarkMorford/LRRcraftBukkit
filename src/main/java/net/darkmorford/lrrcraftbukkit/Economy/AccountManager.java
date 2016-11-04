@@ -44,8 +44,26 @@ public class AccountManager {
         }
     }
 
+    public void savePlayerAccount(PlayerAccount account) {
+        String query = "UPDATE `players` " +
+                "SET `globalBalance` = ? " +
+                "WHERE `id` = ?";
+
+        try {
+            PreparedStatement stmt = dbConn.prepareStatement(query);
+            stmt.setInt(1, account.getDatabaseId());
+            stmt.setDouble(2, account.getBalance());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public PlayerAccount getPlayerAccount(String playerName) {
-        String query = "SELECT * FROM `players`" +
+        String query = "SELECT * FROM `players` " +
                 "WHERE `name` = ? LIMIT 1";
 
         OfflinePlayer player = null;

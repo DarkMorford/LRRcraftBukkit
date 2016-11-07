@@ -4,6 +4,7 @@ version: 0.1-SNAPSHOT
 author: DarkMorford
 description: LRRcraft Bukkit plugin
 commands:
+# Miscellaneous commands
   lrrcraftbukkit:
     usage: /lrrcraftbukkit
     aliases: [lcb]
@@ -16,3 +17,8 @@ commands:
     usage: /lrrcraftbukkit discord
     aliases: [lcb discord]
     description: Link to the Discord channel
+# Economy commands
+  money:
+    usage: /money
+    aliases: [balance]
+    description: Shows your current balance

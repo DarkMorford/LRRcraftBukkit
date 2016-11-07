@@ -1,5 +1,6 @@
 package net.darkmorford.lrrcraftbukkit;
 
+import net.darkmorford.lrrcraftbukkit.Commands.EconomyCommands;
 import net.darkmorford.lrrcraftbukkit.Economy.AccountManager;
 import net.darkmorford.lrrcraftbukkit.Listeners.PlayerJoinListener;
 import org.bukkit.command.Command;
@@ -25,9 +26,10 @@ public class LRRcraftBukkit extends JavaPlugin {
         // (If config.yml already exists, this will not overwrite it)
         saveDefaultConfig();
 
-        // Connect the refresh command to its implementation
+        // Connect the commands to their implementation
         logger.info("Registering commands");
-//      getCommand("lrrcraftbukkit").setExecutor(new RefreshCommand());
+        EconomyCommands econ = new EconomyCommands();
+        getCommand("money").setExecutor(econ);
 
         // Set up our event listeners
         logger.info("Registering event listeners");

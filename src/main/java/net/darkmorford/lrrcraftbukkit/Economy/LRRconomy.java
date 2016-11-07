@@ -2,6 +2,7 @@ package net.darkmorford.lrrcraftbukkit.Economy;
 
 import net.milkbowl.vault.economy.AbstractEconomy;
 import net.milkbowl.vault.economy.EconomyResponse;
+import net.milkbowl.vault.economy.EconomyResponse.ResponseType;
 
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public EconomyResponse withdrawPlayer(String playerName, double amount) {
-        return null;
+        return new EconomyResponse(0, 0, ResponseType.NOT_IMPLEMENTED, "Not yet implemented");
     }
 
     @Override
@@ -85,7 +86,7 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public EconomyResponse depositPlayer(String playerName, double amount) {
-        return null;
+        return new EconomyResponse(0, 0, ResponseType.NOT_IMPLEMENTED, "Not yet implemented");
     }
 
     @Override

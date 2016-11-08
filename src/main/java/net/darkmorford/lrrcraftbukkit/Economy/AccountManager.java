@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class AccountManager {
+public class AccountManager implements IAccountManager {
     private static JavaPlugin plugin = LRRcraftBukkit.plugin;
 
     private Map<String, PlayerAccount> accounts;
@@ -39,7 +39,8 @@ public class AccountManager {
         }
     }
 
-    public void savePlayerAccount(PlayerAccount account) {
+    @Override
+    public boolean savePlayerAccount(PlayerAccount account) {
         String query = "UPDATE `players` " +
                 "SET `globalBalance` = ? " +
                 "WHERE `id` = ?";
@@ -52,11 +53,24 @@ public class AccountManager {
             stmt.executeUpdate();
 
             stmt.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
+    @Override
+    public PlayerAccount createPlayerAccount(String playerName) {
+        return createPlayerAccount(playerName, 0);
+    }
+
+    @Override
+    public PlayerAccount createPlayerAccount(String playerName, double balance) {
+        return null;
+    }
+
+    @Override
     public PlayerAccount getPlayerAccount(String playerName) {
         String query = "SELECT * FROM `players` " +
                 "WHERE `name` = ? LIMIT 1";

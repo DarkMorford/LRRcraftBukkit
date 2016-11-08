@@ -6,7 +6,10 @@ import net.milkbowl.vault.economy.EconomyResponse.ResponseType;
 
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class LRRconomy extends AbstractEconomy {
+    private IAccountManager acctManager;
+
     @Override
     public boolean isEnabled() {
         return true;
@@ -44,7 +47,8 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public boolean hasAccount(String playerName) {
-        return false;
+        PlayerAccount acct = acctManager.getPlayerAccount(playerName);
+        return (acct != null);
     }
 
     @Override
@@ -54,7 +58,8 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public double getBalance(String playerName) {
-        return 0;
+        PlayerAccount acct = acctManager.getPlayerAccount(playerName);
+        return acct.getBalance();
     }
 
     @Override

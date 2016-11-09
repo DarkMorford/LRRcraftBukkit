@@ -59,6 +59,9 @@ public class LRRconomy extends AbstractEconomy {
     @Override
     public double getBalance(String playerName) {
         PlayerAccount acct = acctManager.getPlayerAccount(playerName);
+        if (acct == null)
+            return 0;
+        
         return acct.getBalance();
     }
 
@@ -90,7 +93,7 @@ public class LRRconomy extends AbstractEconomy {
 
         // Make sure they have enough
         if (acct.getBalance() < amount)
-            return new EconomyResponse(0, acct.getBalance(), ResponseType.FAILURE, playerName + " does not have an account");
+            return new EconomyResponse(0, acct.getBalance(), ResponseType.FAILURE, playerName + " doesn't have enough money");
 
         // Actually perform the transaction and commit it
         acct.subtractBalance(amount);

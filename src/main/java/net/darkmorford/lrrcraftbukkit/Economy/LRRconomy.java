@@ -81,7 +81,22 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public EconomyResponse withdrawPlayer(String playerName, double amount) {
-        return new EconomyResponse(0, 0, ResponseType.NOT_IMPLEMENTED, "Not yet implemented");
+        // Get the account for the player
+        PlayerAccount acct = acctManager.getPlayerAccount(playerName);
+
+        // Make sure we actually got an account object
+        if (acct == null)
+            return new EconomyResponse(0, 0, ResponseType.FAILURE, playerName + " does not have an account");
+
+        // Make sure they have enough
+        if (acct.getBalance() < amount)
+            return new EconomyResponse(0, acct.getBalance(), ResponseType.FAILURE, playerName + " does not have an account");
+
+        // Actually perform the transaction and commit it
+        acct.subtractBalance(amount);
+        acctManager.savePlayerAccount(acct);
+
+        return new EconomyResponse(amount, acct.getBalance(), ResponseType.SUCCESS, "Withdrawal successful");
     }
 
     @Override
@@ -91,7 +106,18 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public EconomyResponse depositPlayer(String playerName, double amount) {
-        return new EconomyResponse(0, 0, ResponseType.NOT_IMPLEMENTED, "Not yet implemented");
+        // Get the account for the player
+        PlayerAccount acct = acctManager.getPlayerAccount(playerName);
+
+        // Make sure we actually got an account object
+        if (acct == null)
+            return new EconomyResponse(0, 0, ResponseType.FAILURE, playerName + " does not have an account");
+
+        // Perform and commit the transaction
+        acct.addBalance(amount);
+        acctManager.savePlayerAccount(acct);
+
+        return new EconomyResponse(amount, acct.getBalance(), ResponseType.SUCCESS, "Deposit successful");
     }
 
     @Override
@@ -146,7 +172,8 @@ public class LRRconomy extends AbstractEconomy {
 
     @Override
     public boolean createPlayerAccount(String playerName) {
-        return false;
+        PlayerAccount acct = acctManager.createPlayerAccount(playerName);
+        return (acct != null);
     }
 
     @Override

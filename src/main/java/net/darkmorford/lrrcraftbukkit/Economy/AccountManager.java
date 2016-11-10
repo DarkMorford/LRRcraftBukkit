@@ -2,6 +2,7 @@ package net.darkmorford.lrrcraftbukkit.Economy;
 
 import net.darkmorford.lrrcraftbukkit.LRRcraftBukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -67,7 +68,36 @@ public class AccountManager implements IAccountManager {
 
     @Override
     public PlayerAccount createPlayerAccount(String playerName, double balance) {
-        return null;
+        String query = "INSERT OR IGNORE INTO `players` " +
+                "(`name`, `uuid`, `balance`) VALUES " +
+                "(?, ?, ?)";
+
+        OfflinePlayer player = plugin.getServer().getOfflinePlayer(playerName);
+        int databaseId = 0;
+
+        try {
+            PreparedStatement stmt = dbConn.prepareStatement(query);
+            stmt.setString(1, player.getName());
+            stmt.setString(2, player.getUniqueId().toString());
+            stmt.setDouble(3, balance);
+
+            stmt.execute();
+
+            ResultSet results = stmt.getGeneratedKeys();
+            if (results.next()) {
+                databaseId = results.getInt(1);
+            }
+
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (databaseId > 0) {
+            return new PlayerAccount(player, balance, databaseId);
+        }
+        else
+            return null;
     }
 
     @Override

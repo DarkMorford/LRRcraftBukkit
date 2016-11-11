@@ -10,6 +10,10 @@ import java.util.List;
 public class LRRconomy extends AbstractEconomy {
     private IAccountManager acctManager;
 
+    public LRRconomy(IAccountManager accountManager) {
+        acctManager = accountManager;
+    }
+
     @Override
     public boolean isEnabled() {
         return true;
@@ -61,7 +65,7 @@ public class LRRconomy extends AbstractEconomy {
         PlayerAccount acct = acctManager.getPlayerAccount(playerName);
         if (acct == null)
             return 0;
-        
+
         return acct.getBalance();
     }
 

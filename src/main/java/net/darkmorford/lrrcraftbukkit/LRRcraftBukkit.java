@@ -2,6 +2,7 @@ package net.darkmorford.lrrcraftbukkit;
 
 import net.darkmorford.lrrcraftbukkit.Commands.EconomyCommands;
 import net.darkmorford.lrrcraftbukkit.Economy.AccountManager;
+import net.darkmorford.lrrcraftbukkit.Economy.LRRconomy;
 import net.darkmorford.lrrcraftbukkit.Listeners.EconomyListener;
 import net.darkmorford.lrrcraftbukkit.Listeners.PlayerJoinListener;
 import org.bukkit.command.Command;
@@ -14,6 +15,7 @@ public class LRRcraftBukkit extends JavaPlugin {
 
     public static Logger logger;
     public static JavaPlugin plugin;
+    public static LRRconomy economy;
 
     @Override
     public void onEnable() {
@@ -40,6 +42,10 @@ public class LRRcraftBukkit extends JavaPlugin {
         // Set up the account manager
         logger.info("Creating account manager");
         AccountManager mgr = new AccountManager();
+
+        // Set up the Economy system
+        logger.info("Creating economy");
+        economy = new LRRconomy(mgr);
 
 //      logger.info("Registering recipes");
 //      Recipe leatherRecipe = new FurnaceRecipe(new ItemStack(Material.LEATHER), Material.ROTTEN_FLESH);

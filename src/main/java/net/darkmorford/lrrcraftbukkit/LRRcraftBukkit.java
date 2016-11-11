@@ -2,6 +2,7 @@ package net.darkmorford.lrrcraftbukkit;
 
 import net.darkmorford.lrrcraftbukkit.Commands.EconomyCommands;
 import net.darkmorford.lrrcraftbukkit.Economy.AccountManager;
+import net.darkmorford.lrrcraftbukkit.Listeners.EconomyListener;
 import net.darkmorford.lrrcraftbukkit.Listeners.PlayerJoinListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -34,6 +35,7 @@ public class LRRcraftBukkit extends JavaPlugin {
         // Set up our event listeners
         logger.info("Registering event listeners");
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        getServer().getPluginManager().registerEvents(new EconomyListener(), this);
 
         // Set up the account manager
         logger.info("Creating account manager");
